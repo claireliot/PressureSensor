@@ -1,0 +1,26 @@
+#include <CapacitiveSensor.h>
+
+int touch = 0;
+
+CapacitiveSensor   cs_2_4 = CapacitiveSensor(2,4);        // 10 megohm resistor between pins 4 & 2, pin 2 is sensor pin, add wire, foil
+
+void setup()                    
+{
+  pinMode(10,OUTPUT);
+ 
+   cs_2_4.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
+   Serial.begin(9600);
+
+}
+
+void loop()                    
+{
+    long total1 =  cs_2_4.capacitiveSensor(30);
+
+    Serial.print(total1);                  // print sensor output 1
+    Serial.print("\r\n");
+
+    analogWrite(10, total1);
+   
+}
+
